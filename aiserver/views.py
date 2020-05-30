@@ -9,36 +9,26 @@ from .ai import imageProcessing
 
 @csrf_exempt
 def process_file(request):
-    responseData = {
-            'id': 4,
-            'name': 'Test Response',
-            'roles' : ['Admin','User']
-        }
-
     if request.method == 'POST':
         #
         if request.FILES.get("photo", None) is not None:
 			# grab the uploaded image
-            # print("Entroooooo")
+            # Image sería la imagen que se envía a Firebase
             image = imageProcessing.grab_image(stream=request.FILES["photo"])
+            responseData = {
+                'success' : True
+            }
         
         else:
             print("No se envio")
+            responseData = {
+                'success' : False
+            }
 
-        '''
-        _, file = request.FILES.popitem() 
-        #file = file[0]
-        print(request.headers)
-        #imageProcessing.handle_uploaded_image(request.FILES['photo'])
-        '''
-        '''
-        form = UploadFileForm(request.POST, request.FILES)
-        print(request.POST)
-        if form.is_valid():
-            imageProcessing.handle_uploaded_image(request.FILES['file'])
-            return JsonResponse(responseData)
-        else:
-            print("Not valid")
-        '''
+    else:
+        responseData = {
+            'success' : False
+        }
 
+    # Se deben devolver las caracteristicas de la imagen
     return JsonResponse(responseData)
