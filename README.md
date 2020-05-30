@@ -1,2 +1,2 @@
-# vitalcol
-Shiny Piggies Hackaton app. Recuerda cuándo tomar tus pastillas sin compliques.
+# pill-in
+Hackaton winning app by the legendary Shiny Piggies
