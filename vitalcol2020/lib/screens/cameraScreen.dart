@@ -38,7 +38,7 @@ class _CameraScreenState extends State<CameraScreen> {
               child: ListBody(
                 children: <Widget>[
                   GestureDetector(
-                    child: Text("Galeria"),
+                    child: Text("Galería"),
                     onTap: () {
                       openGallery();
                     },
