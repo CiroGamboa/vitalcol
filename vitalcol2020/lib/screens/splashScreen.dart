@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -18,7 +19,11 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   }
 
   navigatorPage() {
-    Navigator.pushNamed(context, 'login');
+    FirebaseAuth.instance.currentUser().then((currentUser) =>
+    (currentUser == null)
+        ? Navigator.pushReplacementNamed(context, "/login")
+        : Navigator.pushReplacementNamed(context, '/home')
+    ).catchError((err) => print(err));
   }
 
   @override
@@ -56,6 +61,27 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Center(
+        child: Container(
+          color: Colors.white,
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Center(
+            child: ScaleTransition(
+              scale: animation,
+              child: Hero(
+                tag: "logo",
+                child: Container(
+                  color: Colors.transparent,
+                  width: 250.0,
+                  child: Image.asset("assets/logo.png"),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );;
   }
 }

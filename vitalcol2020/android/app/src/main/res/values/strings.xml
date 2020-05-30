@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Vital Col App</string>
+
+    <!-- Replace "000000000000" with your Facebook App ID here. -->
+    <string name="facebook_app_id">274292710290297</string>
+
+
+    <!--
+      Replace "000000000000" with your Facebook App ID here.
+      **NOTE**: The scheme needs to start with `fb` and then your ID.
+    -->
+    <string name="fb_login_protocol_scheme">fb274292710290297</string>
+</resources>
