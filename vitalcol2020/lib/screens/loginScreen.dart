@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,6 +9,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  String emailValidator(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      return 'Email no valido';
+    } else {
+      return null;
+    }
+  }
 
   final formKey = new GlobalKey<FormState>();
   String _email, _password;
@@ -31,6 +44,89 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  loginEmail(){
+    if (formKey.currentState.validate()) {
+      formKey.currentState.save();
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Container(
+              height: 100.0,
+              child: Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: Color(0xFFf15a24),
+                  valueColor:
+                  new AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              ),
+            ),
+          );
+        },
+      );
+      FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+          email: _email.trim(), password: _password.trim())
+          .then(
+            (currentUser) => Firestore.instance
+            .collection("users")
+            .document(currentUser.user.uid)
+            .get()
+            .then(
+              (DocumentSnapshot result) => Navigator.pushReplacementNamed(context, '/home')
+
+        )
+            .catchError((err) {
+          Navigator.pop(context);
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("UPS!"),
+                content:
+                Text("Usuario o contraseña incorrecto"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Volver"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              );
+            },
+          );
+        }),
+      )
+          .catchError(
+            (err) => showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("UPS!"),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(20.0))),
+                content:
+                Text("Usuario o contraseña incorrecto"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Volver"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              );
+            }),
+      );
+    }
+  }
+
+  loginFacebook(){
+
+  }
+
   @override
     Widget build(BuildContext context) {
       final logo = Container(
@@ -39,9 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
       final email = TextFormField(
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
-        validator: (val) {
-          return val.isEmpty ? "Este campo es obligatorio" : null;
-        },
+        validator: emailValidator,
         onSaved: (val) => _email = val,
         decoration: InputDecoration(
           hintText: 'Correo',
@@ -83,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: MaterialButton(
               minWidth: 200.0,
               height: 55.0,
-              onPressed: (){},
+              onPressed: loginEmail,
               child: Text('INGRESAR', style: TextStyle(color: Colors.white)),
             ),
           ),
@@ -105,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: MaterialButton(
               minWidth: 50.0,
               height: 42.0,
-              onPressed: (){},
+              onPressed: loginFacebook,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
