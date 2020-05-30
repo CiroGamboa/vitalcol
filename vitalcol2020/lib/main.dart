@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:vitalcol2020/screens/calendarScreen.dart';
+import 'package:vitalcol2020/screens/cameraScreen.dart';
+import 'package:vitalcol2020/screens/configScreen.dart';
+import 'package:vitalcol2020/screens/homeScreen.dart';
+import 'package:vitalcol2020/screens/loginScreen.dart';
+import 'package:vitalcol2020/screens/registerScreen.dart';
+import 'package:vitalcol2020/screens/splashScreen.dart';
 
 void main() {
   runApp(MyApp());
