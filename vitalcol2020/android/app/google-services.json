@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "402652658905",
+    "firebase_url": "https://vitalcol.firebaseio.com",
+    "project_id": "vitalcol",
+    "storage_bucket": "vitalcol.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402652658905:android:edb7f8b361a185b73892c8",
+        "android_client_info": {
+          "package_name": "com.piggies.vitalcol2020"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "402652658905-0a5eir8etvl0f8k3fe2m83720441ms36.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXBu_-wBMOg0lwsBgYm8jX1gXaJP2NMRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "402652658905-0a5eir8etvl0f8k3fe2m83720441ms36.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
