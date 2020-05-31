@@ -16,7 +16,7 @@ def process_file(request):
             # Image sería la imagen que se envía a Firebase
             image = imageProcessing.grab_image(stream=request.FILES["photo"])
             responseData = {
-                'success' : True
+                'success' : True 
             }
         
         else:
