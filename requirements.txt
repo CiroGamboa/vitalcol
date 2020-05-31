@@ -1,4 +1,4 @@
 Django==3.0.6
 opencv-python==4.2.0.34
 pytesseract==0.3.4
-pyrebase
+gunicorn==20.0.4

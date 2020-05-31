@@ -1,5 +1,7 @@
-build:
-    docker:
-        web: Dockerfile
+docker:
+    web: Dockerfile
 run:
-    web: python manage.py runserver 0.0.0.0:8000
+    web: gunicorn vitalcol.wsgi:application --bind 0.0.0.0:$PORT
+release:
+    image: web
+    
