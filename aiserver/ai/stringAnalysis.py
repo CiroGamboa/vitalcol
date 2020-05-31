@@ -23,7 +23,7 @@ def process_string(string):
 
         # Check if the words match the key words in the header
         if(not is_header):
-            is_header = check_header(line,2)
+            is_header = check_header(line,1)
 
         else:
 
