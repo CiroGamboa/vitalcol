@@ -30,6 +30,7 @@ dependencies:
   firebase_auth: ^0.16.0
   cloud_firestore: ^0.13.5
   flutter_facebook_login: ^3.0.0
+  table_calendar: ^2.2.3
 
 
 dev_dependencies:
@@ -53,6 +54,7 @@ flutter:
     - assets/google.png
     - assets/logo.png
     - assets/logoBorde.png
+    - assets/enfermera.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

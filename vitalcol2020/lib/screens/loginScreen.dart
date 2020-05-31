@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -22,7 +23,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   final formKey = new GlobalKey<FormState>();
-  String _email, _password;
+  final formKey2 = new GlobalKey<FormState>();
+  String _email, _password, _correoR;
 
 
   void initState() {
@@ -44,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  //Metodo para loguearse usando el login y la contraseña.
   loginEmail(){
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
@@ -123,10 +126,29 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  loginFacebook(){
+  //Login usando la api de Facebook.
+  /*
+  loginFacebook() async {
+    final facebookLogin = FacebookLogin();
+    final FacebookLoginResult facebookLoginResult = await facebookLogin.logIn(['email', 'public_profile']);
+
+    switch (facebookLoginResult.status) {
+      case FacebookLoginStatus.loggedIn:
+        FacebookAccessToken facebookAccessToken = facebookLoginResult.accessToken;
+        AuthCredential authCredential = FacebookAuthProvider.getCredential(accessToken: facebookAccessToken.token);
+        FirebaseUser fbUser;
+        fbUser = (await FirebaseAuth.instance.signInWithCredential(authCredential)).user;
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        break;
+      case FacebookLoginStatus.error:
+        print(facebookLoginResult.errorMessage);
+        break;
+    }
+
 
   }
-
+*/
   @override
     Widget build(BuildContext context) {
       final logo = Container(
@@ -143,6 +165,47 @@ class _LoginScreenState extends State<LoginScreen> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         ),
       );
+      resetPasswordRequest() async {
+        final form = formKey2.currentState;
+
+        if (form.validate()) {
+          form.save();
+          await FirebaseAuth.instance
+              .sendPasswordResetEmail(email: _correoR.trim())
+              .then((value) => Navigator.of(context).pop())
+              .catchError(
+                (e) {
+              Navigator.of(context).pop();
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text("UPS!"),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                    content: Text(
+                        "No encontramos a nadie con ese correo, prueba registrandote"),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text("Volver"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      FlatButton(
+                        child: Text("Registrar"),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed("/register");
+                        },
+                      )
+                    ],
+                  );
+                },
+              );
+            },
+          );
+        }
+      }
 
       final password = TextFormField(
         autofocus: false,
@@ -199,7 +262,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: MaterialButton(
               minWidth: 50.0,
               height: 42.0,
-              onPressed: loginFacebook,
+              onPressed: (){},
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -257,7 +320,44 @@ class _LoginScreenState extends State<LoginScreen> {
             'Recuperar contraseña',
             style: TextStyle(color: Colors.black54),
           ),
-          onPressed: () {},
+          onPressed: () => showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Ingrese tu Correo!"),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                content: Form(
+                  key: formKey2,
+                  child: TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    autofocus: false,
+                    validator: emailValidator,
+                    onSaved: (val) => _correoR = val,
+                    decoration: InputDecoration(
+                      hintText: 'Correo registrado',
+                      contentPadding:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0)),
+                    ),
+                  ),
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Volver"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: Text("Mandar"),
+                    onPressed: resetPasswordRequest,
+                  )
+                ],
+              );
+            },
+          ),
         ),
       );
 
@@ -278,7 +378,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ],
           ),
-          onPressed: () {},
+          onPressed: () => Navigator.of(context).pushNamed("/register"),
         ),
       );
 
