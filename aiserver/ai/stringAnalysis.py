@@ -2,6 +2,7 @@ from .keyWords import header, dosis, schedule, medicine
 import re
 
 def process_string(string):
+    print("EXTRAYECTO PRESCRIPCIONES\n")
     # Split the detected string using line jumps
     no_jump_string = string.split('\n')
 

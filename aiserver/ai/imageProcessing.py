@@ -9,6 +9,11 @@ def grab_image(path=None, stream=None, url=None):
     if path is not None:
         image = cv2.imread(path)
         print("Sirvio")
+        custom_config = r'--oem 3 --psm 6'
+        string = pytesseract.image_to_string(image, config=custom_config)
+        
+        result = process_string(string)
+        print(result)
 	# otherwise, the image does not reside on disk
     else:	
 		# if the URL is not None, then download the image
@@ -21,7 +26,7 @@ def grab_image(path=None, stream=None, url=None):
 		# OpenCV format
         image = np.asarray(bytearray(data), dtype="uint8")
         image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-        print("Imagen leida correctamente")
+        print("IMAGEN LEÍDA CORRECTAMENTE")
 
         custom_config = r'--oem 3 --psm 6'
         string = pytesseract.image_to_string(image, config=custom_config)
