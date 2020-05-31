@@ -2,11 +2,14 @@ import google.cloud
 from google.cloud import storage
 import firebase_admin
 from firebase_admin import credentials, firestore
+import os, sys
 
 
 def initFirebase():
     #Cargar ruta certificado
-    ruta_certificado="vitalcol-firebase-adminsdk-ys044-dbc2c8d81d.json"
+    #ruta_certificado= os.path.join(sys.path[0],"vitalcol-firebase-adminsdk-ys044-dbc2c8d81d.json")
+    ruta_certificado= "/code/vitalcol-firebase-adminsdk-ys044-dbc2c8d81d.json"
+
     cred = credentials.Certificate(ruta_certificado)
 
     #Correr una sola vez en caso de que las funciones no sirvan, luego volver a comentar

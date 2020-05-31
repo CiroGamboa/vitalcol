@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
+
+
 from .forms import UploadFileForm
 from .ai import imageProcessing 
 
@@ -37,6 +39,7 @@ def process_file(request):
 @csrf_exempt
 def test_db(request):
     # Codigo para probar la conexion con la DB
+    #firebase.initFirebase()
 
     db_test_success = True
 

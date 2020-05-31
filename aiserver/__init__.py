@@ -1,3 +1,3 @@
-import firebase
+from .firebase import initFirebase
 
-firebase.initFirebase()
+initFirebase()
