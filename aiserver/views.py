@@ -32,3 +32,18 @@ def process_file(request):
 
     # Se deben devolver las caracteristicas de la imagen
     return JsonResponse(responseData)
+
+
+@csrf_exempt
+def test_db(request):
+    # Codigo para probar la conexion con la DB
+
+    db_test_success = True
+
+    if(db_test_success){
+        return JsonResponse({'success' : True})
+    }
+    else{
+        return JsonResponse({'success' : False})
+    }
+

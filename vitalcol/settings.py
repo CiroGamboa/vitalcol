@@ -8,6 +8,12 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
+
+Check this for deploying with docker and django
+https://testdriven.io/blog/deploying-django-to-heroku-with-docker/
+
+Check this for tesseract and docker
+https://github.com/ricktorzynski/ocr-tesseract-docker
 """
 
 import os
