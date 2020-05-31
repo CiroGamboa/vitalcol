@@ -11,6 +11,9 @@ from .ai import imageProcessing
 def process_file(request):
     if request.method == 'POST':
         #
+        print('HEADERS:', request.headers)
+        #print('BODY:', request.body)
+
         if request.FILES.get("photo", None) is not None:
 			# grab the uploaded image
             # Image sería la imagen que se envía a Firebase
