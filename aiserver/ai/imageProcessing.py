@@ -75,3 +75,12 @@ def grab_image2(path=None, stream=None, url=None):
     return image
 
 
+def grab_image5(img):
+    custom_config = r'--oem 3 --psm 6'
+    #img = Image.open('foto_prescripcion.jpeg')
+    string = pytesseract.image_to_string(img, config=custom_config)
+    result = process_string(string)
+    print(result)
+    return result
+
+

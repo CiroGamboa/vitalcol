@@ -7,6 +7,8 @@ from .ai import imageProcessing
 import requests
 import json
 import ast
+from PIL import Image
+
 
 
 # Method for receiving a file a extract characters
@@ -78,22 +80,25 @@ def getResult(request):
     '''
     id_usuario = mydata['idUsuario']
     url = mydata['photo']
-    #url = 'https://firebasestorage.googleapis.com/v0/b/vitalcol.appspot.com/o/WhatsApp%20Image%202020-05-31%20at%201.45.20%20PM.jpeg?alt=media&token=70663696-e7e9-4a43-a73b-9adcadca0795'
-    #r = requests.get(url, allow_redirects=True)
+    descargar_imagen(url,'temp')
 
-    #try:
-    #open('temp.jpg', 'wb').write(r.content)
 
-    #responseData = imageProcessing.grab_image(path='temp.jpg')
-    
-    #except:
-    responseData = {'success' : True}
+    img = Image.open('temp.jpeg')
+    result = imageProcessing.grab_image5(img)
+
+
+
+    #responseData = {'success' : True}
+    responseData = result
 
     # Se deben devolver las caracteristicas de la imagen
     return JsonResponse(responseData)
     
 
-
+def descargar_imagen(url, nombre_archivo):
+    f = open(nombre_archivo+'.jpeg','wb')
+    f.write(requests.get(url).content)
+    f.close()
 
 
     
