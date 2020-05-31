@@ -15,10 +15,10 @@ def process_string(string):
             is_header = check_header(no_space_string,2)
 
         else:
-            pass
+            dispatch_string(no_space_string)
             # 4. Once the header is found, proceed to analice 
             # block of medicine and dosis
-            
+
 
 
 def check_header(words, min_matches=2):
