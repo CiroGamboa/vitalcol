@@ -76,8 +76,9 @@ class _LoginScreenState extends State<LoginScreen> {
             .document(currentUser.user.uid)
             .get()
             .then(
-              (DocumentSnapshot result) => Navigator.pushReplacementNamed(context, '/home')
-
+              
+              (DocumentSnapshot result) { 
+                Navigator.pushReplacementNamed(context, '/home');}
         )
             .catchError((err) {
           Navigator.pop(context);

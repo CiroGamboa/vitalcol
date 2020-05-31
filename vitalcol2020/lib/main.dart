@@ -17,10 +17,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
+      initialRoute: '/camera',
       title: 'VitalCol',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
 }
 
 final routes = {
-  '/': (BuildContext context) => SplashScreen(),
+  //'/': (BuildContext context) => SplashScreen(),
   '/login': (BuildContext context) => LoginScreen(),
   '/register': (BuildContext context) => RegisterScreen(),
   '/home': (BuildContext context) => HomeScreen(),
