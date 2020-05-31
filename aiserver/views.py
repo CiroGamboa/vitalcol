@@ -40,10 +40,10 @@ def test_db(request):
 
     db_test_success = True
 
-    if(db_test_success){
+    if(db_test_success):
         return JsonResponse({'success' : True})
-    }
-    else{
+    
+    else:
         return JsonResponse({'success' : False})
-    }
+    
 
