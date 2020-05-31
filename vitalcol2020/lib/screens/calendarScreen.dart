@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class CalendarScreen extends StatefulWidget {
   @override
@@ -6,6 +7,19 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
+  CalendarController _calendarController;
+  @override
+  void initState() {
+    super.initState();
+    _calendarController = CalendarController();
+  }
+
+  @override
+  void dispose() {
+    _calendarController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +43,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
         ),
         centerTitle: true,
       ),
-      body: Center(),
+      body: TableCalendar(
+        calendarController: _calendarController,
+      ),
     );
   }
 }
