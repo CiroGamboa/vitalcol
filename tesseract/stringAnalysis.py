@@ -113,23 +113,82 @@ def check_schedule(line, min_matches=2):
     sched_words = keyWords.schedule
     dosis_words = keyWords.dosis
 
-    words = line.split(' ')
+    sched = {}
+
+    words = line.lower().split(' ')
+
+    # Cases
+    if('dosis' in words):
+        if('tab' in words):
+            cont = 0
+            for word in words:
+                if(word == 'tab'):
+                    dosis = int(words[cont-1])
+                    
+                    # Esto debería discriminar mejor si es en días o no
+                    # por lo pronto devolvamos días
+
+                    sched['med_type'] = 'TABLETAS'
+                    sched['dosis'] = dosis
+                    sched['period'] = 'day'
+
+                elif(word == 'por'):
+                    sched['duration'] = word[cont + 1]
+                    sched['duration_units'] = word[cont + 2]
+
+                cont+=1
+
+            pass
+        elif('aplicar'):
+            for word in words:
+                if(word == 'aplicar'):
+                    dosis = int(words[cont-1])
+
+                    sched['med_type'] = 'INYECCIÓN'
+                    sched['dosis'] = dosis
+                    sched['period'] = 'day'
+
+                elif(word == 'por'):
+                    sched['duration'] = word[cont + 1]
+                    sched['duration_units'] = word[cont + 2]
+
+        elif('tomar'):
+            for word in words:
+
+                
+
+                if(word == 'por'):
+                    sched['duration'] = word[cont + 1]
+                    sched['duration_units'] = word[cont + 2]
+            
+
+
+
+
+
+
+
 
     matches = 0
     cont = 0
     for word in words:
         cont += 1
-        low_word = word.lower()
+
+
+
+
 
         #if(low_word in sched_words or word in dosis_words):
             #matches += 1
 
         # Cases
+        '''
         if(low_word == 'tab'):
             try:
                 
                 if(contain_digits(words[cont-1]) == 'all'):
                     tab_dosis = int(words[cont-1])
+        '''
                 
                 
 
