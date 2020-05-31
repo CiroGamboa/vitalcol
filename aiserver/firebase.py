@@ -5,10 +5,13 @@ from firebase_admin import credentials, firestore
 import os, sys
 
 
+
+
+
 def initFirebase():
     #Cargar ruta certificado
     #ruta_certificado= os.path.join(sys.path[0],"vitalcol-firebase-adminsdk-ys044-dbc2c8d81d.json")
-    ruta_certificado= "/code/vitalcol-firebase-adminsdk-ys044-dbc2c8d81d.json"
+    ruta_certificado= "/code/aiserver/vitalcol-firebase-adminsdk-ys044-dbc2c8d81d.json"
 
     cred = credentials.Certificate(ruta_certificado)
 
@@ -16,6 +19,8 @@ def initFirebase():
     firebase_admin.initialize_app(cred,{
                 'databaseURL': 'https://{}.firebaseio.com'.format("vitalcol"),
                 'storageBucket': 'vitalcol.appspot.com'.format("vitalcol")}, name='vitalcol')
+
+
 
 
 def consultarFirestoreBD(collection):
@@ -40,7 +45,7 @@ def numRegistros(collection):
 
 
 def addsStorageBD(imagePath,nombreArchivo):
-    storage_client = storage.Client.from_service_account_json("vitalcol-firebase-adminsdk-ys044-dbc2c8d81d.json")
+    storage_client = storage.Client.from_service_account_json("/code/aiserver/vitalcol-firebase-adminsdk-ys044-dbc2c8d81d.json")
     bucket=storage_client.bucket(bucket_name=f"vitalcol.appspot.com")
     imageBlob = bucket.blob("/")
     # imagePath = [os.path.join(self.path,f) for f in os.listdir(self.path)]
@@ -51,3 +56,7 @@ def addsStorageBD(imagePath,nombreArchivo):
     url = imageBlob.public_url
     #output =imageBlob.download_as_string() Capturar Archivo que se subio
     print(url)
+
+
+
+

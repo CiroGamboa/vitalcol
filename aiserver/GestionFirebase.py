@@ -11,9 +11,10 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 #Cargar ruta certificado
-ruta_certificado="vitalcol-firebase-adminsdk-ys044-dbc2c8d81d.json"
+ruta_certificado="/code/aiserver/vitalcol-firebase-adminsdk-ys044-dbc2c8d81d.json"
 cred = credentials.Certificate(ruta_certificado)
 
+print("Do it")
 #Correr una sola vez en caso de que las funciones no sirvan, luego volver a comentar
 firebase_admin.initialize_app(cred,{
             'databaseURL': 'https://{}.firebaseio.com'.format("vitalcol"),
@@ -21,7 +22,7 @@ firebase_admin.initialize_app(cred,{
 
 
 collection=u'Medicamentos'
-
+ 
 def consultarFirestoreBD(collection):
     store = firestore.client()
     doc_ref = store.collection(collection).limit(2)

@@ -1,3 +1,11 @@
-from .firebase import initFirebase
+#from .firebase import *
+#from .GestionFirebase import consultarFirestoreBD
 
-initFirebase()
+#print("Iniciando Firebase")
+#initFirebase()
+
+#collection=u'Medicamentos'
+#consultarFirestoreBD(collection)
+
+from .firebase import *
+
