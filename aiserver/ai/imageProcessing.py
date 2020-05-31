@@ -34,6 +34,17 @@ def grab_image(path=None, stream=None, url=None):
     return result    
 
 
+def grab_image3(image):
+    custom_config = r'--oem 3 --psm 6'
+    string = pytesseract.image_to_string(image, config=custom_config)
+    
+    result = process_string(string)
+    print(result)
+
+	# return the image
+    return result    
+
+
 
 
 def grab_image2(path=None, stream=None, url=None):
