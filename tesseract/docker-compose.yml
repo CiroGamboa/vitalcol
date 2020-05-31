@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-    tesseract:
+    ocr:
         build: .
         command: python pruebas.py
         volumes:

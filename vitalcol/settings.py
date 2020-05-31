@@ -25,7 +25,7 @@ SECRET_KEY = '6wl4k#-zkp#(()=i&_w=l%s=_0g1(o!-47qs-9v2-2f5oj(z-('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','vitalcol.herokuapp.com']
 
 
 # Application definition
