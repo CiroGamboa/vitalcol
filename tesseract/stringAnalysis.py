@@ -50,48 +50,7 @@ def dispatch_string(line):
     # y hay un schedule. Si ya se encontró la
     # pareja bien. Pero si sólo se encontro uno
     # de los dos, no sirve mucho, entonces no se guarda
-
-
-
-
-
-
-
-
-    '''
-    possible_med_found = False
-    med = []
-    dosis = []
-    sched = []
-    for word in words:
-        # Check if the word contains numbers
-        digits = contains_digit(word)
-        if(digits == 'no'):
-            # Possible med
-            med.append(word)
-
-        elif(digits == 'some'):
-            # Possible schedule or dosis
-            dosis.append(word)
-            sched.append(word)
-
-        #Only numbers
-        elif(digits == 'all'):
-            # Possible id, schedule or dosis
-            dosis.append(word)
-            sched.append(word)
-            pass
-
     
-    print("Possible medicine: ",med)
-    print("Possible dosis: ", dosis)
-    print("Possible schedule: ", sched)
-    '''
-
-            
-
-                
-
 
 
 def check_medicine(line):
@@ -155,59 +114,11 @@ def check_schedule(line, min_matches=2):
         elif('tomar'):
             for word in words:
 
-                
-
                 if(word == 'por'):
                     sched['duration'] = word[cont + 1]
                     sched['duration_units'] = word[cont + 2]
             
-
-
-
-
-
-
-
-
-    matches = 0
-    cont = 0
-    for word in words:
-        cont += 1
-
-
-
-
-
-        #if(low_word in sched_words or word in dosis_words):
-            #matches += 1
-
-        # Cases
-        '''
-        if(low_word == 'tab'):
-            try:
-                
-                if(contain_digits(words[cont-1]) == 'all'):
-                    tab_dosis = int(words[cont-1])
-        '''
-                
-                
-
-
-        
-        # Ya se encontro alguna coincidencia, por ejemplo la palabra DOSIS
-       # if(matches > 0):
-            
-
-        
-
-
-
-
-
-
-
-
-
+    return sched
 
 
 
