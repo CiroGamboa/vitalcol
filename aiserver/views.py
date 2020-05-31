@@ -17,10 +17,10 @@ def process_file(request):
         if request.FILES.get("photo", None) is not None:
 			# grab the uploaded image
             # Image sería la imagen que se envía a Firebase
-            image = imageProcessing.grab_image(stream=request.FILES["photo"])
-            responseData = {
-                'success' : True 
-            }
+            responseData = imageProcessing.grab_image(stream=request.FILES["photo"])
+            #responseData = {
+            #    'success' : True 
+            #}
         
         else:
             print("No se envio")
