@@ -131,6 +131,6 @@ dmypy.json
 # Mac
 .DS_Store
 
-/tesseract/*
+
 
 /utils/*
