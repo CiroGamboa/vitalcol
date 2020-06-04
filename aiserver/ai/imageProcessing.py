@@ -4,6 +4,7 @@ import pytesseract
 from .stringAnalysis import process_string
 
 
+
 def grab_image(path=None, stream=None, url=None):
 	# if the path is not None, then load the image from disk
     if path is not None:
@@ -78,9 +79,25 @@ def grab_image2(path=None, stream=None, url=None):
 def grab_image5(img):
     custom_config = r'--oem 3 --psm 6'
     #img = Image.open('foto_prescripcion.jpeg')
+
+
+    #ojo
+    #print(img)
+    #thresh = thresholding(img)
     string = pytesseract.image_to_string(img, config=custom_config)
+
+    #ojo
+
+
+
+    #string = pytesseract.image_to_string(img, config=custom_config)
     result = process_string(string)
     print(result)
     return result
+
+#thresholding
+def thresholding(image):
+    return cv2.threshold(image,127,255,cv2.THRESH_BINARY)
+
 
 

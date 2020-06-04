@@ -49,7 +49,7 @@ def process_string(string):
 
 
 
-def check_header(line, min_matches=2):
+def check_header(line, min_matches=1):
     key_words = header
     matches = 0
 

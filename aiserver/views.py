@@ -61,46 +61,73 @@ def test_db(request):
 
 @csrf_exempt
 def getResult(request):
-    try:
-        #response = request.body.decode('utf-8')
-        #j = json.dump(response)
-        #print(j['idUsuario'])
+    #try:
+    #response = request.body.decode('utf-8')
+    #j = json.dump(response)
+    #print(j['idUsuario'])
 
-        byte_str = request.body
-        dict_str = byte_str.decode("UTF-8")
-        mydata = ast.literal_eval(dict_str)
-        print(mydata)
-
-
-        '''
-        idUsuario = request.POST.get('idUsuario', '')
-        url = request.POST.get('photo', '')
-        print("Id:",idUsuario)
-        print("Url",url)
-        '''
-        id_usuario = mydata['idUsuario']
-        url = mydata['photo']
-        descargar_imagen(url,'temp')
+    byte_str = request.body
+    dict_str = byte_str.decode("UTF-8")
+    mydata = ast.literal_eval(dict_str)
+    print(mydata)
 
 
-        img = Image.open('temp.jpeg')
-        result = imageProcessing.grab_image5(img)
+    '''
+    idUsuario = request.POST.get('idUsuario', '')
+    url = request.POST.get('photo', '')
+    print("Id:",idUsuario)
+    print("Url",url)
+    '''
+    id_usuario = mydata['idUsuario']
+    url = mydata['photo']
+    descargar_imagen(url,'temp')
+
+
+    img = Image.open('temp.jpeg')
+    result = imageProcessing.grab_image5(img)
 
 
 
-        #responseData = {'success' : True}
-        responseData = result
+    #responseData = {'success' : True}
+    responseData = result
 
-        # Se deben devolver las caracteristicas de la imagen
-        return JsonResponse(responseData)
-    except:
-        return JsonResponse({'success' : False})
+    # Se deben devolver las caracteristicas de la imagen
+    return JsonResponse(responseData)
+    #except:
+        #return JsonResponse({'success' : False})
     
 
 def descargar_imagen(url, nombre_archivo):
     f = open(nombre_archivo+'.jpeg','wb')
     f.write(requests.get(url).content)
     f.close()
+
+
+@csrf_exempt
+def processImage(request):
+
+    byte_str = request.body
+    dict_str = byte_str.decode("UTF-8")
+    mydata = ast.literal_eval(dict_str)
+    print(mydata)
+
+    id_usuario = mydata['idUsuario']
+    url = mydata['photo']
+    descargar_imagen(url,'temp')
+
+    img = Image.open('temp.jpeg')
+    result = imageProcessing.grab_image5(img)
+
+    #result = 
+
+    #responseData = {'success' : True}
+    responseData = result
+
+    # Se deben devolver las caracteristicas de la imagen
+    return JsonResponse(responseData)
+    #except:
+        #return JsonResponse({'success' : False})
+
 
 
     

@@ -1,16 +1,19 @@
 import cv2 
 import pytesseract
-import stringAnalysis
 
 print("PRUEBAS DE TESSERACT\n\n")
 
-img = cv2.imread('presc-test.jpg')
+name = 'test2.jpeg'
+print(name)
+img = cv2.imread(name)
 
 # Adding custom options
 custom_config = r'--oem 3 --psm 6'
-string = pytesseract.image_to_string(img, config=custom_config)
-stringAnalysis.process_string(string)
+osd = pytesseract.image_to_osd(img)
+angle = re.search('(?<=Rotate: )\d+', osd).group(0)
 
-#string = pytesseract.image_to_string(img)
+print("angle:",angle)
+#string = pytesseract.image_to_string(img, config=custom_config)
+#
 #print(string)
 print("FUNCIONAAAAA")
